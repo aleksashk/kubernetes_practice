@@ -1,4 +1,4 @@
-package by.flameksandr.kubernetes;
+package by.flameksandr.kubernetes.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
