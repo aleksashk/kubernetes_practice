@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-test
+  namespace: javaguru
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: kube.local
+      http:
+        paths:
+          - path: /test-service(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: my-deployment
+                port:
+                  name: http
+    - host: localhost
+      http:
+        paths:
+          - path: /test-service(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: my-deployment
+                port:
+                  name: http

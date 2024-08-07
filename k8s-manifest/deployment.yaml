@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+  namespace: javaguru
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-deployment
+  template:
+    metadata:
+      labels:
+        app: my-deployment
+    spec:
+      containers:
+        - name: test-pipeline
+          image: 93.125.42.36:8123/repository/docker-release/test-service:1.0.0
+          env:
+            - name: APP_PORT
+              value: "9090"
+            - name: spring.profiles.active
+              value: "open-api,management"
+            - name: KAFKA_SERVERS
+              value: "cp-kafka-service:9092"
+            - name: IS_KAFKA_ENABLED
+              value: "false"
+            - name: server.servlet.context-path
+              value: "/test"
+      imagePullSecrets:
+        - name: nexus-secret
